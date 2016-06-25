@@ -18,10 +18,10 @@ def cache_stats():
 
     if cache_config['type'] == 'redis':
         r = redis.StrictRedis(host=cache_config['host'], port=cache_config['port'], db=0)
-        return Response(json.dumps(r.info()), 200, content_type='application/json')
+        return Response(json_to_html(r.info()), 200, content_type='application/json')
     elif cache_config['type'] == 'memcached':
         cache = MemcachedStats(cache_config['host'], cache_config['port'])
-        return Response(json.dumps(cache.stats()), 200, content_type='application/json')
+        return Response(json_to_html(cache.stats()), 200, content_type='application/json')
 
 
 @app.route("/cache-services", methods=['POST'])
@@ -32,6 +32,15 @@ def register_cache_services():
 @app.route("/cache-services", methods=['DELETE'])
 def unregister_cache_services():
     return "Hello World!"
+
+
+def json_to_html(json_object):
+    html = "<pre>\n"
+    for (key, val) in json_object.items():
+        html += key + ":" + repr(val) + "\n"
+    html += "</pre>"
+    return html
+
 
 if __name__ == "__main__":
     app.run()
