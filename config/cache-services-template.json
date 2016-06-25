@@ -1,0 +1,14 @@
+[
+  {
+    "type": "redis",
+    "name": "localhost-redis",
+    "host": "localhost",
+    "port": 6379
+  },
+  {
+    "type": "memcached",
+    "name": "localhost-memcached",
+    "host": "localhost",
+    "port": 11211
+  }
+]

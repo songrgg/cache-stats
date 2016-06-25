@@ -1,0 +1,3 @@
+Flask
+redis
+git+git://github.com/dlrust/python-memcached-stats.git
